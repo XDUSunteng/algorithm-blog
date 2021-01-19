@@ -15,22 +15,24 @@ $$
 f[i][j] = max(f[i][j - 1], f[i +2^{j-1}][j - 1])
 $$
 几个重要的变量:
-$$
-由2^j\le n得,j \le log_2(n)\\
-由i + 2^j-1 \le n得, i\le n- 2^j+1
-$$
+
+由$2^j\le n$得,$j \le log_2(n)$.
+
+由$i + 2^j-1 \le n$得, $i\le n- 2^j+1$.
 
 ### 查询
 
-$k = \lfloor log_2(待查询区间的长度) \rfloor$.
+下文以`len`表示待查询区间的长度
+
+$k = \lfloor log_2(len) \rfloor$.
 
 ![0018](/img/0018.png)
 
-当待查询区间的长度是`2`的非负整数次幂时,$2\times 2^k=2 \times 2^{\lfloor log_2(待查询区间的长度) \rfloor}=2\times 待查询区间的长度 \gt待查询区间的长度$.
+当待查询区间的长度是`2`的非负整数次幂时,$2\times 2^k=2 \times 2^{\lfloor log_2(len) \rfloor}=2\times len \gt len$.
 
 当待查询区间的长度不是`2`的非负整数次幂时,
 
-$2\times 2^k=2 \times 2^{\lfloor log_2(待查询区间的长度) \rfloor}=2^{\lfloor log_2(待查询区间的长度) \rfloor+1}=2^{\lceil log_2(待查询区间的长度) \rceil} \gt 待查询区间的长度$.
+$2\times 2^k=2 \times 2^{\lfloor log_2(len) \rfloor}=2^{\lfloor log_2(len) \rfloor+1}=2^{\lceil log_2(len) \rceil} \gt len$.
 
 ## 实现
 

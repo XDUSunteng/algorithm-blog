@@ -10,7 +10,7 @@ module.exports = {
         ['link', { rel: 'stylesheet', href: 'https://cdn.jsdelivr.net/github-markdown-css/2.2.1/github-markdown.css' }],
     ],
     markdown: {
-        lineNumber: true,
+        lineNumbers: true,
         extendMarkdown: md => {
             md.use(require('markdown-it-katex'))
         },
