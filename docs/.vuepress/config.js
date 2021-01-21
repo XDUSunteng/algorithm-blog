@@ -16,6 +16,7 @@ module.exports = {
         },
     },
     themeConfig: {
+        logo: '/img/logo_a.png',
         nav: [{
             text: '模板（题）',
             link: '/template/',
