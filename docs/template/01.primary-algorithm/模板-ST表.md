@@ -6,33 +6,33 @@
 
 ### 预处理
 
-$f[i][j]$记录从$arr[i]$到$arr[i + 2^j-1]$共$2^j$个数的最大值.
+$f[i][j]$记录从$a[i]$到$a[i + 2^j-1]$共$2^j$个数的最大值。
 
-![0017](/img/0017.png)
+![](/img/0017.png)
 
-状态转移方程:
-$$
-f[i][j] = max(f[i][j - 1], f[i +2^{j-1}][j - 1])
-$$
-几个重要的变量:
+状态转移方程：$f[i][j] = max(f[i][j - 1], f[i +2^{j-1}][j - 1])$。
 
-由$2^j\le n$得,$j \le log_2(n)$.
+几个重要的变量：
 
-由$i + 2^j-1 \le n$得, $i\le n- 2^j+1$.
+- 由$2^j \le n$得，$j \le log_2(n)$。
+
+- 由$i + 2^j-1 \le n$得， $i \le n- 2^j+1$。
+
+时间复杂度$O(nlogn)$。
 
 ### 查询
 
-下文以`len`表示待查询区间的长度
+下文以`len`表示待查询区间的长度。
 
-$k = \lfloor log_2(len) \rfloor$.
+设$k = \lfloor log_2(len) \rfloor$。
 
-![0018](/img/0018.png)
+![](/img/0018.png)
 
-当待查询区间的长度是`2`的非负整数次幂时,$2\times 2^k=2 \times 2^{\lfloor log_2(len) \rfloor}=2\times len \gt len$.
+- 当待查询区间的长度是`2`的非负整数次幂时，$2\times 2^k=2 \times 2^{\lfloor log_2(len) \rfloor}=2\times len \gt len$。
 
-当待查询区间的长度不是`2`的非负整数次幂时,
+- 当待查询区间的长度不是`2`的非负整数次幂时，$2\times 2^k=2 \times 2^{\lfloor log_2(len) \rfloor}=2^{\lfloor log_2(len) \rfloor+1}=2^{\lceil log_2(len) \rceil} \gt len$。
 
-$2\times 2^k=2 \times 2^{\lfloor log_2(len) \rfloor}=2^{\lfloor log_2(len) \rfloor+1}=2^{\lceil log_2(len) \rceil} \gt len$.
+时间复杂度$O(1)$。
 
 ## 实现
 
@@ -40,29 +40,30 @@ $2\times 2^k=2 \times 2^{\lfloor log_2(len) \rfloor}=2^{\lfloor log_2(len) \rflo
 #include <iostream>
 #include <cmath>
 using namespace std;
+
 const int N = 100010;
-int n, m;
+int n, q;
 int a[N], f[N][20];
-void ST_create()
-{
-    for(int i = 1; i <= n; ++ i) f[i][0] = a[i];
+
+void ST_create () {
+    for (int i = 1; i <= n; ++ i) f[i][0] = a[i];
     int k = log(n) / log(2);
-    for(int j = 1; j <= k; ++ j)
-        for(int i = 1; i <= n - (1 << j) + 1; ++ i)
+    for (int j = 1; j <= k; ++ j)
+        for (int i = 1; i <= n - (1 << j) + 1; ++ i)
             f[i][j] = max(f[i][j - 1], f[i + (1 << (j - 1))][j - 1]);
 }
-int ST_query(int l, int r)
-{
+int ST_query (int l, int r) {
     int k = log(r - l + 1) / log(2);
     return max(f[l][k], f[r - (1 << k) + 1][k]);
 }
-int main()
-{
-    scanf("%d%d", &n, &m);
-    for(int i = 1; i <= n; ++ i) scanf("%d", &a[i]);
+
+int main () {
+    scanf("%d%d", &n, &q);
+    for (int i = 1; i <= n; ++ i) scanf("%d", &a[i]);
+
     ST_create();
-    for(int i = 1, l, r; i <= m; ++ i)
-    {
+    while (q --) {
+        int l, r;
         scanf("%d%d", &l, &r);
         printf("%d\n", ST_query(l, r));
     }

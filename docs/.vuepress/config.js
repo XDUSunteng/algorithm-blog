@@ -59,7 +59,7 @@ module.exports = {
             '/solution/': getSolutionSidebar(),
         },
         sidebarDepth: 2,
-        lastUpdated: 'Last Updated',
+        lastUpdated: '最后修改于',
     },
 }
 
