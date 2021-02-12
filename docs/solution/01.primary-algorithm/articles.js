@@ -34,6 +34,7 @@ module.exports = {
         children: [
             prefix + '1.5 排序/题解-士兵-货仓选址.md',
             prefix + '1.5 排序/题解-逆序对的数量-归并排序.md',
+            prefix + '1.5 排序/题解-拼数-排序.md',
         ],
     }, {
         title: '倍增',
