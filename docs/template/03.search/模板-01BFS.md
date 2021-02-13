@@ -8,68 +8,61 @@
 #include <iostream>
 #include <cstring>
 #include <queue>
+#define inf 0x3f3f3f3f
 using namespace std;
+
 const int N = 110, M = 10010;
-struct edge
-{
-    int to;
-    int next;
-    int w;
+struct edge {
+    int to, next, w;
 };
 edge e[M];
 int idx, head[N];
 int n, a, b, dis[N];
 bool mark[N];
-void add_edge(int u, int v, int w)
-{
+
+void add_edge (int u, int v, int w) {
     e[idx].w = w;
     e[idx].to = v;
     e[idx].next = head[u];
     head[u] = idx ++;
 }
-int O1BFS()
-{
+int bfs_01 () {
     memset(dis, 0x3f, sizeof(dis));
     dis[a] = 0;
     deque<int> dq;
     dq.push_back(a);
-    while(!dq.empty())
-    {
+    while (!dq.empty()) {
         int cur = dq.front();
         dq.pop_front();
-        if(mark[cur] == true) continue;
+        if (mark[cur] == true) continue;
         mark[cur] = true;
-        for(int i = head[cur]; i != -1; i = e[i].next)
-        {
+        for (int i = head[cur]; i != -1; i = e[i].next) {
             int to = e[i].to, w = e[i].w;
-            if(dis[to] > dis[cur] + w)
-            {
+            if (dis[to] > dis[cur] + w) {
                 dis[to] = dis[cur] + w;
-                if(w == 0)
+                if (w == 0)
                     dq.push_front(to);
                 else
                     dq.push_back(to);
             }
         }
     }
-    return dis[b] == 0x3f3f3f3f ? -1 : dis[b];
+    return dis[b] == inf ? -1 : dis[b];
 }
-int main()
-{
+
+int main () {
     memset(head, -1, sizeof(head));
     scanf("%d%d%d", &n, &a, &b);
-    for(int i = 1, k, to; i <= n; ++ i)
-    {
+    for (int i = 1, k, to; i <= n; ++ i) {
         scanf("%d", &k);
         int w = 0;
-        while(k --)
-        {
+        while (k --) {
             scanf("%d", &to);
             add_edge(i, to, w);
             w = 1;
         }
     }
-    printf("%d\n", O1BFS());
+    printf("%d", bfs_01());
     return 0;
 }
 ```

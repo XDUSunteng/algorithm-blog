@@ -37,7 +37,6 @@ module.exports = {
     }, {
         title: '搜索',
         children: [
-            '/template/03.search/模板-树的重心.md',
             '/template/03.search/模板-01BFS.md',
             '/template/03.search/模板-双向BFS.md',
             '/template/03.search/模板-双重BFS.md',
