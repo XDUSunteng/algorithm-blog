@@ -18,6 +18,8 @@ module.exports = {
                 return moment(timestamp).format('YYYY年MM月DD日 HH时mm分')
             },
         },
+    ], [
+        '@vuepress/medium-zoom',
     ]],
     markdown: {
         lineNumbers: true,
