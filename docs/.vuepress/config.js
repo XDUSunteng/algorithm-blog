@@ -47,7 +47,7 @@ module.exports = {
                 text: '《算法竞赛进阶指南》题库',
                 link: 'https://ac.nowcoder.com/acm/archive/oi-advance/problem',
             }, {
-                text: 'Leet Code',
+                text: 'LeetCode',
                 link: 'https://leetcode-cn.com/',
             }],
         }, {
