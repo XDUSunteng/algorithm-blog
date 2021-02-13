@@ -1,6 +1,8 @@
 const { getTemplateSidebar } = require('../template/articles.js')
 const { getSolutionSidebar } = require('../solution/articles.js')
+const moment = require('moment')
 
+moment.locale('zh-cn')
 module.exports = {
     title: 'Algo. Blog',
     description: "SunTeng's Algorithm Blog",
@@ -9,6 +11,14 @@ module.exports = {
         ['link', { rel: 'stylesheet', href: 'https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.5.1/katex.min.css' }],
         ['link', { rel: 'stylesheet', href: 'https://cdn.jsdelivr.net/github-markdown-css/2.2.1/github-markdown.css' }],
     ],
+    plugins: [[
+        '@vuepress/last-updated',
+        {
+            transformer: (timestamp) => {
+                return moment(timestamp).format('YYYY年MM月DD日 HH时mm分')
+            },
+        },
+    ]],
     markdown: {
         lineNumbers: true,
         extendMarkdown: md => {
